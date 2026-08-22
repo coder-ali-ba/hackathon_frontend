@@ -36,7 +36,7 @@ function Register() {
       formDataImage.append("image", file);
 
       const response = await axios.post(
-        "http://localhost:7800/api/image/upload",
+        "https://hackathon-backend-seven-jet.vercel.app/api/image/upload",
         formDataImage,
         {
           headers: {

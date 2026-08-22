@@ -38,7 +38,7 @@ function GoogleLogin() {
 
             try {
               const result = await axios.post(
-                "http://localhost:7800/api/auth/google/signin",
+                "https://hackathon-backend-seven-jet.vercel.app/api/auth/google/signin",
                 {
                   credential: response.credential,
                 },
