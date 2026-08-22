@@ -8,8 +8,9 @@ import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 
 import RoleProtectedRoute from "./components/RoleProtectedRoute";
-import Unauthorized from "./pages/Unauthorized";
+
 import ManagerDashboard from "./pages/ManagerDashboard";
+import Unauthorized from "./pages/Unauthorized";
 
 function App() {
   return (
