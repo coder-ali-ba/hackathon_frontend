@@ -31,7 +31,7 @@ export const createProject = async (data) => {
   const response = await axios.post(
     `${API_URL}/create`,
     data,
-    getConfig()
+   
   );
 
   return response.data;
