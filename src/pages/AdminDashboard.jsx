@@ -17,7 +17,7 @@ import {
   deleteProject,
   approveProject,
   rejectProject,
-} from "../../services/projectApi";
+} from "../services/projectApis";
 import DashboardStats from "../components/admin/DashboardStats";
 import ProjectList from "../components/admin/ProjectList";
 import ProjectForm from "../components/admin/ProjectForm";
