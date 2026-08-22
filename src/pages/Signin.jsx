@@ -11,36 +11,84 @@ function Signin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     setLoading(true);
+  //     setError("");
+
+  //     const response = await axios.post(
+  //       "https://hackathon-backend-seven-jet.vercel.app/api/auth/signin",
+  //       {
+  //         email,
+  //         password,
+  //       }
+  //     );
+
+  //     Cookies.set("token", response.data.token, {
+  //       expires: 7,
+  //       sameSite: "lax",
+  //     });
+
+  //     window.location.href = "/dashboard";
+  //   } catch (error) {
+  //     setError(
+  //       error.response?.data?.message ||
+  //         "Email or password is incorrect"
+  //     );
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      setLoading(true);
-      setError("");
+  try {
+    setLoading(true);
+    setError("");
 
-      const response = await axios.post(
-        "https://hackathon-backend-seven-jet.vercel.app/api/auth/signin",
-        {
-          email,
-          password,
-        }
-      );
+    const response = await axios.post(
+      "https://hackathon-backend-seven-jet.vercel.app/api/auth/signin",
+      {
+        email,
+        password,
+      }
+    );
 
-      Cookies.set("token", response.data.token, {
-        expires: 7,
-        sameSite: "lax",
-      });
+    const { token, user } = response.data;
 
+    Cookies.set("token", token, {
+      expires: 7,
+      sameSite: "lax",
+    });
+
+    Cookies.set("userType", user.userType, {
+      expires: 7,
+      sameSite: "lax",
+    });
+
+    if (user.userType === "admin") {
+      window.location.href = "/admin/dashboard";
+    } else if (user.userType === "projectManager") {
+      window.location.href = "/project-manager/dashboard";
+    } else if (user.userType === "user") {
       window.location.href = "/dashboard";
-    } catch (error) {
-      setError(
-        error.response?.data?.message ||
-          "Email or password is incorrect"
-      );
-    } finally {
-      setLoading(false);
+    } else {
+      setError("Invalid user role");
     }
-  };
+
+  } catch (error) {
+    setError(
+      error.response?.data?.message ||
+        "Email or password is incorrect"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-100 flex items-center justify-center px-4">
