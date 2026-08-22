@@ -11,37 +11,7 @@ function Signin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     setLoading(true);
-  //     setError("");
-
-  //     const response = await axios.post(
-  //       "https://hackathon-backend-seven-jet.vercel.app/api/auth/signin",
-  //       {
-  //         email,
-  //         password,
-  //       }
-  //     );
-
-  //     Cookies.set("token", response.data.token, {
-  //       expires: 7,
-  //       sameSite: "lax",
-  //     });
-
-  //     window.location.href = "/dashboard";
-  //   } catch (error) {
-  //     setError(
-  //       error.response?.data?.message ||
-  //         "Email or password is incorrect"
-  //     );
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
+ 
 
   const handleLogin = async (e) => {
   e.preventDefault();
