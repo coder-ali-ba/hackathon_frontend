@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 function Register() {
   const navigate = useNavigate();
 
@@ -12,6 +11,9 @@ function Register() {
     number: "",
     password: "",
     imageUrl: "",
+    city: "",
+    skills: "",
+    userType: ""
   });
 
   const [loading, setLoading] = useState(false);
@@ -79,6 +81,9 @@ function Register() {
         number: "",
         password: "",
         imageUrl: "",
+        city: "",
+        skills: "",
+        userType: ""
       });
 
       setTimeout(() => {
@@ -196,6 +201,56 @@ function Register() {
                   required
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-200 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition"
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  City
+                </label>
+
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  placeholder="Rawalpindi"
+                  required
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Skills
+                </label>
+
+                <input
+                  type="text"
+                  name="skills"
+                  value={formData.skills}
+                  onChange={handleChange}
+                  placeholder="you@example.com"
+                  required
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  User Type
+                </label>
+
+                <select
+                  name="userType"
+                  value={formData.userType}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition"
+                >
+                  <option value="">Select User Type</option>
+                  <option value="user">User</option>
+                  <option value="projectManager">Project Manager</option>
+                </select>
               </div>
 
               {/* Image */}
