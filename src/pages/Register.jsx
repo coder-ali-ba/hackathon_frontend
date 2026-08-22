@@ -65,7 +65,7 @@ function Register() {
       setSuccess("");
 
       const response = await axios.post(
-        "http://hackathon-backend-seven-jet.vercel.app/api/auth/register",
+        "https://hackathon-backend-seven-jet.vercel.app/api/auth/register",
         formData,
       );
 
