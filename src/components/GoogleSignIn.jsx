@@ -1,8 +1,11 @@
 import { useEffect, useRef } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 function GoogleLogin() {
   const googleButtonRef = useRef(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const loadGoogleScript = () => {
@@ -48,6 +51,7 @@ function GoogleLogin() {
               );
 
               console.log(result.data);
+              navigate("/dashboard");
             } catch (error) {
               console.log(error.response?.data || error.message);
             }
