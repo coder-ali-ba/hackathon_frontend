@@ -21,6 +21,7 @@ import {
 import DashboardStats from "../components/admin/DashboardStats";
 import ProjectList from "../components/admin/ProjectList";
 import ProjectForm from "../components/admin/ProjectForm";
+import Logout from "../components/Logout";
 
 function AdminDashboard() {
   const [projects, setProjects] = useState([]);
@@ -224,8 +225,7 @@ function AdminDashboard() {
           <button
             className="flex items-center gap-2 text-red-600"
           >
-            <LogOut size={18} />
-            Logout
+            <Logout />
           </button>
 
         </div>

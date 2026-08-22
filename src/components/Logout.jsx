@@ -5,8 +5,18 @@ function Logout() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    Cookies.remove("token");
+    // Remove authentication cookies
+    Cookies.remove("token", { path: "/" });
+    Cookies.remove("userType", { path: "/" });
 
+    // Optional: remove localStorage data
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("userType");
+
+    console.log("Token after logout:", Cookies.get("token"));
+
+    // Redirect
     navigate("/signin", { replace: true });
   };
 
