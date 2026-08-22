@@ -9,7 +9,7 @@ const initialState = {
   endDate: "",
   assignedTo: "",
   skillsRequired: "",
-  projectImage: "",
+  
 };
 
 function ProjectForm({
@@ -52,8 +52,7 @@ function ProjectForm({
         skillsRequired:
           selectedProject.skillsRequired || "",
 
-        projectImage:
-          selectedProject.projectImage || "",
+        
       });
     } else {
       setFormData(initialState);
@@ -182,15 +181,7 @@ function ProjectForm({
             className="w-full border p-3 rounded-xl"
           />
 
-          <input
-            type="text"
-            name="projectImage"
-            placeholder="Project Image URL"
-            value={formData.projectImage}
-            onChange={handleChange}
-            required
-            className="w-full border p-3 rounded-xl"
-          />
+          
 
           <div className="flex justify-end gap-3 pt-4">
 
