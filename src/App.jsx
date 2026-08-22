@@ -7,10 +7,11 @@ import Dashboard from "./pages/Dashboard";
 
 import AdminDashboard from "./pages/AdminDashboard";
 
-import RoleProtectedRoute from "./components/RoleProtectedRoute";
+
 
 import ManagerDashboard from "./pages/ManagerDashboard";
 import Unauthorized from "./pages/Unauthorized";
+import RoleProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
   return (
