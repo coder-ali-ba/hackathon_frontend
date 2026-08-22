@@ -11,12 +11,12 @@ import {
 
 
 import {
-  getProjects,
+  // getProjects,
   createProject,
-  updateProject,
-  deleteProject,
-  approveProject,
-  rejectProject,
+  // updateProject,
+  // deleteProject,
+  // approveProject,
+  // rejectProject,
 } from "../services/projectApis";
 import DashboardStats from "../components/admin/DashboardStats";
 import ProjectList from "../components/admin/ProjectList";
