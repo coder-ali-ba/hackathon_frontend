@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "js-cookie"
 
 function GoogleLogin() {
   const googleButtonRef = useRef(null);
@@ -51,6 +51,10 @@ function GoogleLogin() {
               );
 
               console.log(result.data);
+              Cookies.set("token", result.data.token, {
+                      expires: 7,
+                      sameSite: "lax",
+                    });
               navigate("/dashboard");
             } catch (error) {
               console.log(error.response?.data || error.message);

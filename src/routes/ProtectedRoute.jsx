@@ -1,14 +1,16 @@
-import { Navigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
-function ProtectedRoute({ children }) {
+
+import Cookies from "js-cookie";
+import {  Navigate, Outlet } from "react-router-dom";
+
+function ProtectedRoute() {
   const token = Cookies.get("token");
 
   if (!token) {
     return <Navigate to="/signin" replace />;
   }
-
-  return children;
+  
+  return <Outlet />;
 }
 
 export default ProtectedRoute;
