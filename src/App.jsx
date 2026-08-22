@@ -12,6 +12,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import ManagerDashboard from "./pages/ManagerDashboard";
 import Unauthorized from "./pages/Unauthorized";
 import RoleProtectedRoute from "./routes/ProtectedRoute";
+import UserDashboard from "./pages/UserDashBoard";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
 
       {/* USER */}
       <Route element={<RoleProtectedRoute allowedRoles={["user"]} />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<UserDashboard />} />
       </Route>
 
       {/* PROJECT MANAGER */}
