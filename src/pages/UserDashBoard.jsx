@@ -7,7 +7,6 @@ import {
   CheckSquare,
   Bell,
   User,
-  LogOut,
   Search,
   MapPin,
   Users,
@@ -16,6 +15,7 @@ import {
   MessageSquare,
   
 } from "lucide-react";
+import Logout from "../components/Logout";
 
 function UserDashboard() {
   const [activePage, setActivePage] = useState("dashboard");
@@ -155,6 +155,8 @@ function UserDashboard() {
     console.log("Task:", id, "New Status:", newStatus);
   };
 
+  
+
   return (
     <div className="min-h-screen bg-gray-100 flex">
       {/* SIDEBAR */}
@@ -191,9 +193,8 @@ function UserDashboard() {
           })}
         </div>
 
-        <button className="absolute bottom-8 left-5 right-5 flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-500 transition">
-          <LogOut size={20} />
-          Logout
+        <button className="absolute bottom-8 left-5 right-5 flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-500 transition" >
+          <Logout />
         </button>
       </aside>
 
