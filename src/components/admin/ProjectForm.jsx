@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const initialState = {
   projectTitle: "",
@@ -9,7 +11,6 @@ const initialState = {
   endDate: "",
   assignedTo: "",
   skillsRequired: "",
-  
 };
 
 function ProjectForm({
@@ -18,8 +19,57 @@ function ProjectForm({
   onClose,
   loading,
 }) {
-  const [formData, setFormData] =
-    useState(initialState);
+  const [formData, setFormData] = useState(initialState);
+
+  const [users, setUsers] = useState([]);
+  const [usersLoading, setUsersLoading] = useState(false);
+
+  // ==============================
+  // FETCH USERS
+  // ==============================
+
+  const fetchUsers = async () => {
+    try {
+      setUsersLoading(true);
+
+      const token = Cookies.get("token");
+
+      const response = await axios.get(
+        "https://hackathon-backend-seven-jet.vercel.app/api/auth/allusers",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("USERS:", response.data);
+
+      setUsers(response.data.data || []);
+
+    } catch (error) {
+      console.log(
+        "GET USERS ERROR:",
+        error.response?.data || error.message
+      );
+
+    } finally {
+      setUsersLoading(false);
+    }
+  };
+
+  // ==============================
+  // FETCH USERS WHEN FORM OPENS
+  // ==============================
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+
+  // ==============================
+  // EDIT PROJECT DATA
+  // ==============================
 
   useEffect(() => {
     if (selectedProject) {
@@ -51,13 +101,18 @@ function ProjectForm({
 
         skillsRequired:
           selectedProject.skillsRequired || "",
-
-        
       });
+
     } else {
       setFormData(initialState);
     }
+
   }, [selectedProject]);
+
+
+  // ==============================
+  // HANDLE CHANGE
+  // ==============================
 
   const handleChange = (e) => {
     setFormData({
@@ -66,17 +121,27 @@ function ProjectForm({
     });
   };
 
+
+  // ==============================
+  // SUBMIT
+  // ==============================
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     onSubmit(formData);
   };
 
+
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
+
       <div className="bg-white w-full max-w-2xl rounded-2xl p-6 max-h-[90vh] overflow-y-auto">
 
+        {/* HEADER */}
+
         <div className="flex justify-between items-center mb-6">
+
           <h2 className="text-xl font-bold">
             {selectedProject
               ? "Edit Project"
@@ -84,17 +149,22 @@ function ProjectForm({
           </h2>
 
           <button
+            type="button"
             onClick={onClose}
             className="text-gray-500 text-xl"
           >
             ✕
           </button>
+
         </div>
+
 
         <form
           onSubmit={handleSubmit}
           className="space-y-4"
         >
+
+          {/* PROJECT TITLE */}
 
           <input
             type="text"
@@ -106,6 +176,9 @@ function ProjectForm({
             className="w-full border p-3 rounded-xl"
           />
 
+
+          {/* DESCRIPTION */}
+
           <textarea
             name="description"
             placeholder="Project Description"
@@ -115,6 +188,9 @@ function ProjectForm({
             rows="4"
             className="w-full border p-3 rounded-xl"
           />
+
+
+          {/* CATEGORY + LOCATION */}
 
           <div className="grid md:grid-cols-2 gap-4">
 
@@ -140,6 +216,9 @@ function ProjectForm({
 
           </div>
 
+
+          {/* DATES */}
+
           <div className="grid md:grid-cols-2 gap-4">
 
             <input
@@ -162,15 +241,45 @@ function ProjectForm({
 
           </div>
 
-          <input
-            type="text"
-            name="assignedTo"
-            placeholder="Assigned To"
-            value={formData.assignedTo}
-            onChange={handleChange}
-            required
-            className="w-full border p-3 rounded-xl"
-          />
+
+          {/* ASSIGNED TO */}
+
+          <div>
+
+            <label className="block mb-2 font-medium text-gray-700">
+              Assign Project To
+            </label>
+
+            <select
+              name="assignedTo"
+              value={formData.assignedTo}
+              onChange={handleChange}
+              required
+              disabled={usersLoading}
+              className="w-full border p-3 rounded-xl bg-white"
+            >
+
+              <option value="">
+                {usersLoading
+                  ? "Loading users..."
+                  : "Select User"}
+              </option>
+
+              {users.map((user) => (
+                <option
+                  key={user._id}
+                  value={user.name}
+                >
+                  {user.name}
+                </option>
+              ))}
+
+            </select>
+
+          </div>
+
+
+          {/* SKILLS */}
 
           <input
             type="text"
@@ -181,7 +290,8 @@ function ProjectForm({
             className="w-full border p-3 rounded-xl"
           />
 
-          
+
+          {/* BUTTONS */}
 
           <div className="flex justify-end gap-3 pt-4">
 
@@ -210,6 +320,7 @@ function ProjectForm({
         </form>
 
       </div>
+
     </div>
   );
 }
