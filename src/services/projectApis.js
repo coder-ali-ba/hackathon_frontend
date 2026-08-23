@@ -31,7 +31,7 @@ export const createProject = async (data) => {
   const response = await axios.post(
     `${API_URL}/create`,
     data,
-   
+    getConfig()
   );
 
   return response.data;
@@ -58,11 +58,12 @@ export const deleteProject = async (id) => {
   return response.data;
 };
 
+
 export const approveProject = async (id) => {
   const response = await axios.put(
     `${API_URL}/${id}`,
     {
-      status: "approved",
+      status: "Approved",
     },
     getConfig()
   );
@@ -74,7 +75,7 @@ export const rejectProject = async (id) => {
   const response = await axios.put(
     `${API_URL}/${id}`,
     {
-      status: "rejected",
+      status: "Rejected",
     },
     getConfig()
   );
